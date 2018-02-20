@@ -12,9 +12,6 @@ namespace arpscan
 {
     public class Program
     {
-        [DllImport("Iphlpapi.dll", EntryPoint = "SendARP")]
-        internal static extern int SendArp(uint destIpAddress, uint srcIpAddress, byte[] macAddress, ref int macAddressLength);
-
         public static void Main()
         {
             foreach (var unicastAddress in GetInterfaceList())
@@ -66,7 +63,7 @@ namespace arpscan
                 foreach (var unicastAddress in ni.GetIPProperties().UnicastAddresses)
                 {
                     var include = true;
-                    if (ni.OperationalStatus == OperationalStatus.Up) include = false;
+                    if (ni.OperationalStatus != OperationalStatus.Up) include = false;
                     if (ni.NetworkInterfaceType == NetworkInterfaceType.Loopback) include = false;
                     if (unicastAddress.SuffixOrigin == SuffixOrigin.LinkLayerAddress) include = false;
                     if (unicastAddress.Address.AddressFamily != AddressFamily.InterNetwork) include = false;
@@ -107,6 +104,9 @@ namespace arpscan
 
             return new PhysicalAddress(mac);
         }
+
+        [DllImport("Iphlpapi.dll", EntryPoint = "SendARP")]
+        private static extern int SendArp(uint destIpAddress, uint srcIpAddress, byte[] macAddress, ref int macAddressLength);
 
         private static int _scanCount;
 
