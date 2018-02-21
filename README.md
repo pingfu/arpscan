@@ -1,14 +1,16 @@
 arpscan
 -------
 
-for when your laptop is on the other side of the room and you want to know its ip address. windows only, wraps [SendArp()](https://msdn.microsoft.com/en-us/library/windows/desktop/aa366358(v=vs.85).aspx)
-
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/Pingfu/arpscan?branch=master&svg=true)](https://ci.appveyor.com/project/Pingfu/arpscan)
+
+For when your laptop is on the other side of the room and you want to know its ip address.
+
+Windows only, wraps [SendArp()](https://msdn.microsoft.com/en-us/library/windows/desktop/aa366358(v=vs.85).aspx)
 
 ## screenshot
 
 ```
-C:\arpscan\arpscan.exe
+C:\>arpscan.exe
 
 Interface List                                                  Address                         Status      Scan Action
 =======================================================================================================================
