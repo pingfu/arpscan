@@ -67,6 +67,8 @@ namespace arpscan
                     if (ni.NetworkInterfaceType == NetworkInterfaceType.Loopback) include = false;
                     if (unicastAddress.SuffixOrigin == SuffixOrigin.LinkLayerAddress) include = false;
                     if (unicastAddress.Address.AddressFamily != AddressFamily.InterNetwork) include = false;
+
+                    // restrict scanning to /19 networks and smaller
                     if (unicastAddress.Address.AddressFamily == AddressFamily.InterNetwork)
                     {
                         var info = new NetworkInformation(unicastAddress.Address, unicastAddress.IPv4Mask);
